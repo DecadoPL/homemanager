@@ -1,0 +1,17 @@
+<div class="backdrop"th></div>
+<div class="diet-dish-details">
+  <div class="box-header">{{dietDish.dishName}}_____Portions {{dietDish.dietDishQuantity}}/{{dietDish.dishPortions}}</div>
+
+  <p>Ingredients:</p>
+  <div *ngFor="let ingr of dish?.dishIngredients">
+    <p>
+      {{ingr.ingrName}}: {{ingr.dishIngrQuantity}}
+      [{{ingr.dishIngrPortion.ingrPortionName}}] 
+      -Weight: {{ingr.dishIngrPortion.ingrPortionWeight*ingr.dishIngrQuantity}}g
+    </p>
+  </div>
+
+  <div class="diet-dish-details-actions">
+    <button class="bte delete-button" (click)="onClose()">Close</button>
+  </div>
+</div>
