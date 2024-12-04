@@ -189,6 +189,7 @@ export class IngredientDetailsComponent implements OnInit, IDeactivateComponent{
 
 
   onSubmit(){
+    console.log(this.ingredientForm.value)
     if(this.isFormValid){
       this.ingredientService.saveIngredientMONGO(this.ingredientForm.value)
         .subscribe( {

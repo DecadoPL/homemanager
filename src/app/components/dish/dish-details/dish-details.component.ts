@@ -253,7 +253,6 @@ export class DishDetailsComponent implements OnInit, IDeactivateComponent{
   }
 
   changeSelectedPortion(ingrIndex: number, event: any){
-    
     const selectedPortionIndex = event.target.selectedIndex;
     let ingrEdited = this.dishIngredients.at(ingrIndex);
     

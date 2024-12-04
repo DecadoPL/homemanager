@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DishListItemMONGO } from 'src/app/models/dish/dishListItemMONGO.model';
 
 
@@ -7,9 +7,9 @@ import { DishListItemMONGO } from 'src/app/models/dish/dishListItemMONGO.model';
   templateUrl: './dish-list-item.component.html',
   styleUrls: ['./dish-list-item.component.css']
 })
-export class DishListItemComponent implements OnInit{
+export class DishListItemComponent {
   @Input() dish!: DishListItemMONGO;
   @Input() index!: string;
 
-  ngOnInit(){}
+  
 }

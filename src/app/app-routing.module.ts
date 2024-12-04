@@ -14,10 +14,12 @@ import { ShoppingListListComponent } from './components/shopping-list/shopping-l
 import { DietRequirementsListComponent } from './components/dietRequirements/diet-requirements-list/diet-requirements-list.component';
 import { DietRequirementsDetailsComponent } from './components/dietRequirements/diet-requirements-details/diet-requirements-details.component';
 import { CanDeactivateGuardService } from './services/can-deactivate-guard.service';
+import { ExpensesListComponent } from './components/expenses/expenses-list/expenses-list.component';
+import { ExpensesDetailsComponent } from './components/expenses/expenses-details/expenses-details.component';
+import { ExpensesPlanningComponent } from './components/expenses/expenses-planning/expenses-planning.component';
 
 const routes: Routes = [
-  //{path: '', redirectTo: 'folder/Inbox',pathMatch: 'full'},
-  //{path: 'folder/:id', loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)}
+  
   { path: 'ingredients', component: IngredientListComponent},
   { path: 'ingredients/new', component: IngredientDetailsComponent, canDeactivate: [CanDeactivateGuardService]},
   { path: 'ingredients/:id', component: IngredientDetailsComponent, canDeactivate: [CanDeactivateGuardService]},
@@ -41,7 +43,16 @@ const routes: Routes = [
   { path: 'dietRequirements', component: DietRequirementsListComponent},
   { path: 'dietRequirements/new', component: DietRequirementsDetailsComponent, canDeactivate: [CanDeactivateGuardService]},
   { path: 'dietRequirements/:id', component: DietRequirementsDetailsComponent, canDeactivate: [CanDeactivateGuardService]},
+
+  { path: 'expenses', component: ExpensesListComponent},
+  { path: 'expenses/new', component: ExpensesDetailsComponent, canDeactivate: [CanDeactivateGuardService]},
+  { path: 'expenses/planning', component: ExpensesPlanningComponent, canDeactivate: [CanDeactivateGuardService]},
+  { path: 'expenses/:id', component: ExpensesDetailsComponent, canDeactivate: [CanDeactivateGuardService]},
+  
+
+  { path: '', component: HomeComponent ,pathMatch: 'full'},
   { path: '**', component: HomeComponent },
+  
 ];
 
 @NgModule({

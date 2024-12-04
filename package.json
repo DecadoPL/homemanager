@@ -4,12 +4,12 @@
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "lint": "ng lint"
+    "start:front_for_local_backend": "ionic serve --configuration=local",
+    "start:front_for_dev_backend": "ionic serve --configuration=development",
+    "build:front_for_dev_backend": "ionic build --configuration=development",
+    "build:front_for_prod_backend": "ionic build --configuration=production",
+    "sync_with_android": "npx cap sync",
+    "open_with_android": "npx cap open android"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +32,7 @@
     "@ng-bootstrap/ng-bootstrap": "^17.0.0",
     "ionicons": "^7.0.0",
     "ngx-toastr": "^19.0.0",
+    "pdfjs-dist": "^4.8.69",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"

@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
+import { IonicModule,} from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DietDishCardComponent } from './components/diet/diet-dish-card/diet-dish-card.component';
@@ -16,7 +15,6 @@ import { IngredientListComponent } from './components/ingredient/ingredient-list
 import { IngredientListItemComponent } from './components/ingredient/ingredient-list-item/ingredient-list-item.component';
 import { DietListComponent } from './components/diet/diet-list/diet-list.component';
 import { DietListItemComponent } from './components/diet/diet-list-item/diet-list-item.component';
-import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { DishListItemComponent } from './components/dish/dish-list-item/dish-list-item.component';
 import { DietDishDetailsComponent } from './components/diet/diet-dish-details/diet-dish-details.component';
 import { AlertComponent } from './components/alert/alert.component';
@@ -33,7 +31,6 @@ import { DeleteAlertComponent } from './components/delete-alert/delete-alert.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbAlertModule, NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { HttpClientModule } from '@angular/common/http';
 import { DatePipe, JsonPipe } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { DishService } from './services/dish.service';
@@ -43,6 +40,17 @@ import { DietService } from './services/diet.service';
 import { PortionNameService } from './services/portionName.service';
 import { DietRequirementsService } from './services/dietRequirements.service';
 import { ShoppingListService } from './services/shoppingList.service';
+import { ExpensesDetailsComponent } from './components/expenses/expenses-details/expenses-details.component';
+import { ExpensesListComponent } from './components/expenses/expenses-list/expenses-list.component';
+import { ExpensesListItemComponent } from './components/expenses/expenses-list-item/expenses-list-item.component';
+import { ExpensesService } from './services/expenses.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ExpenseCategoryService } from './services/expenseCategory.service';
+import { ExpenseTypeService } from './services/expenseType.service';
+import { ExpenseTargetService } from './services/expenseTarget.service';
+import { ExpensesPlanningComponent } from './components/expenses/expenses-planning/expenses-planning.component';
+import { ExpensesLoadFromFileComponent } from './components/expenses/expenses-load-from-file/expenses-load-from-file.component';
+
 
 @NgModule({
   declarations: [
@@ -57,7 +65,6 @@ import { ShoppingListService } from './services/shoppingList.service';
     IngredientListItemComponent,
     DietListComponent,
     DietListItemComponent,
-    SideBarComponent,
     DishListItemComponent,
     DietDishDetailsComponent,
     AlertComponent,
@@ -70,7 +77,12 @@ import { ShoppingListService } from './services/shoppingList.service';
     ShoppingListDetailsComponent,
     ShoppingListListComponent,
     ShoppingListListItemComponent,
-    DeleteAlertComponent
+    DeleteAlertComponent,
+    ExpensesDetailsComponent,
+    ExpensesListComponent,
+    ExpensesListItemComponent,
+    ExpensesPlanningComponent,
+    ExpensesLoadFromFileComponent,
   ],
   imports: [
     BrowserModule, 
@@ -84,7 +96,7 @@ import { ShoppingListService } from './services/shoppingList.service';
     NgbDatepickerModule, 
     NgbAlertModule, 
     JsonPipe,
-    // BrowserAnimationsModule,
+    BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 5000, // 5 seconds
       closeButton: true,
@@ -101,6 +113,10 @@ import { ShoppingListService } from './services/shoppingList.service';
     DatePipe,
     DietRequirementsService,
     ShoppingListService,
+    ExpensesService,
+    ExpenseCategoryService,
+    ExpenseTypeService,
+    ExpenseTargetService
   ],
   bootstrap: [
     AppComponent

@@ -32,9 +32,13 @@
               }
             ],
             "styles": ["src/global.scss", "src/theme/variables.scss"],
-            "scripts": []
+            "scripts": [
+              "node_modules/pdfjs-dist/build/pdf.worker.min.mjs"
+            ]
           },
           "configurations": {
+
+
             "production": {
               "budgets": [
                 {
@@ -56,7 +60,24 @@
               ],
               "outputHashing": "all"
             },
+
+
             "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
+            },
+
+            "local": {
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -64,6 +85,8 @@
               "sourceMap": true,
               "namedChunks": true
             },
+
+
             "ci": {
               "progress": false
             }
@@ -79,11 +102,14 @@
             "development": {
               "buildTarget": "app:build:development"
             },
+            "local": {
+              "buildTarget": "app:build:local"
+            },
             "ci": {
               "progress": false
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "local"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

@@ -5,14 +5,24 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
+  public dietPages = [
+    { title: 'Ingredients', url: '/ingredients', icon: 'fish' },
+    { title: 'Dishes', url: '/dishes', icon: 'fast-food' },
+    { title: 'Diets', url: '/diets', icon: 'heart' },
+    { title: 'Shared Management', url: '/sharedManagement', icon: 'settings' },
+    { title: 'Diet Requirements', url: '/dietRequirements', icon: 'newspaper' },
+    { title: 'Shopping List', url: '/shoppingList', icon: 'document' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+
+  public moneyPages = [
+    { title: 'Expenses', url: '/expenses', icon: 'card' },
+    { title: 'Planning', url: '/expenses/planning', icon: 'cash' },
+  ];
+
+  public organizationPages = [
+    { title: 'Calendar', url: '/calendar', icon:'calendar'},
+    { title: 'ToDo', url: '/todo', icon: 'list'}
+  ]
+
   constructor() {}
 }
