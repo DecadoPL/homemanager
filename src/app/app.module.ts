@@ -46,7 +46,6 @@ import { ExpensesListItemComponent } from './components/expenses/expenses-list-i
 import { ExpensesService } from './services/expenses.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ExpenseCategoryService } from './services/expenseCategory.service';
-import { ExpenseTypeService } from './services/expenseType.service';
 import { ExpenseTargetService } from './services/expenseTarget.service';
 import { ExpensesPlanningComponent } from './components/expenses/expenses-planning/expenses-planning.component';
 import { ExpensesLoadFromFileComponent } from './components/expenses/expenses-load-from-file/expenses-load-from-file.component';
@@ -115,7 +114,6 @@ import { ExpensesLoadFromFileComponent } from './components/expenses/expenses-lo
     ShoppingListService,
     ExpensesService,
     ExpenseCategoryService,
-    ExpenseTypeService,
     ExpenseTargetService
   ],
   bootstrap: [

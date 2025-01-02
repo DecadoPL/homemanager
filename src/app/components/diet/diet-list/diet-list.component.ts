@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { ToastService } from 'src/app/services/toastService.service';
 import { DietListItemMONGO } from 'src/app/models/diet/dietListItemMONGO.model';
 import { DietService } from 'src/app/services/diet.service';
 
@@ -17,7 +17,7 @@ export class DietListComponent implements OnInit{
   searchText!: string;
 
   constructor(private dietService: DietService,
-              private toastrService: ToastrService){}
+              private toastService: ToastService){}
   
   ngOnInit(){
     this.loadDietsList();
@@ -37,13 +37,13 @@ export class DietListComponent implements OnInit{
     this.dietService.deleteDietMONGO(this.itemId)
     .subscribe({
       next: (response) => {
-        this.toastrService.success(response.message, 'SUCCESS');
+        this.toastService.showToast(response.message, 'success');
         this.alert=false;
         this.loadDietsList();
       },
       error: (error) => {
         let errMessage = error.toString()
-        this.toastrService.error(errMessage.replace("Error: ", ""), "ERROR");
+        this.toastService.showToast(errMessage.replace("Error: ", ""), 'danger');
         this.alert=false;
         this.loadDietsList();
       }
@@ -72,13 +72,13 @@ export class DietListComponent implements OnInit{
   copyItem(id: string){
     this.dietService.copyDietMONGO(id).subscribe({
       next: (response) => {
-        this.toastrService.success(response.message, 'SUCCESS');
+        this.toastService.showToast(response.message, 'success');
         this.alert=false;
         this.loadDietsList();
       },
       error: (error) => {
         let errMessage = error.toString()
-        this.toastrService.error(errMessage.replace("Error: ", ""), "ERROR");
+        this.toastService.showToast(errMessage.replace("Error: ", ""), 'danger');
         this.alert=false;
         this.loadDietsList();
       }

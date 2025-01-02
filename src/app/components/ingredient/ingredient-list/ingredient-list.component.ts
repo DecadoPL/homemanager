@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { ToastService } from 'src/app/services/toastService.service';
 import { catchError, map } from 'rxjs';
 import { IngredientListItemMONGO } from 'src/app/models/ingredient/ingredientListItemMONGO';
 import { IngredientService } from 'src/app/services/ingredient.service';
@@ -18,7 +18,7 @@ export class IngredientListComponent implements OnInit{
   searchText!: string;
 
   constructor(private ingredientService: IngredientService,
-              private toastrService: ToastrService){}
+              private toastService: ToastService){}
 
   ngOnInit(){
     this.loadIngredientsList();
@@ -37,13 +37,13 @@ export class IngredientListComponent implements OnInit{
     this.ingredientService.deleteIngredientMONGO(this.itemId)
     .subscribe({
       next: (response) => {
-        this.toastrService.success(response.message, 'SUCCESS');
+        this.toastService.showToast(response.message, 'success');
         this.alert=false;
         this.loadIngredientsList();
       },
       error: (error) => {
         let errMessage = error.toString()
-        this.toastrService.error(errMessage.replace("Error: ", ""), "ERROR");
+        this.toastService.showToast(errMessage.replace("Error: ", ""), 'danger');
         this.alert=false;
         this.loadIngredientsList();
       }

@@ -1,0 +1,19 @@
+<div id="app">
+  <h1>Budżet Miesięczny</h1>
+  <table>
+      <thead>
+          <tr>
+              <th>Kategoria</th>
+              <th *ngFor="let month of $months">{{ month }}</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let category of $expenseCategories">
+              <td>{{ category.expenseCategoryName }}</td>
+              <td *ngFor="let month of $months">
+                  <input type="number" placeholder="0.00" />
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>

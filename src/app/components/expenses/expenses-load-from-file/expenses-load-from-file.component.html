@@ -1,0 +1,164 @@
+<div class="backdrop"></div>
+<div class="alert-box">
+  <!-- Box Header -->
+  <div class="box-header">
+    <ion-item>
+      <input *ngIf="!$fileHasBeenLoaded" type="file" (change)="onFileSelected($event)" accept="application/pdf" />
+      <div *ngIf="$fileHasBeenLoaded" class="file-loaded-message">
+        File has been successfully loaded.
+      </div>
+      <button class="delete-button" (click)="onLoadCancel()">Cancel</button>
+    </ion-item>
+  </div>
+
+  <!-- Current Operation -->
+  <div class="message-container" (wheel)="onScroll($event)">
+    <form [formGroup]="$expensesForm">
+      <div formArrayName="expenses">
+        <div
+          *ngFor="let expense of expenses.controls; let expenseIndex = index"
+
+          [formGroupName]="expenseIndex"
+          class="operation-wrapper"
+          [ngClass]="{
+            'valid-operation': expense.valid,
+            'invalid-operation': !expense.valid,
+          }"
+        >
+          <!-- Original Data -->
+          <section class="original-data" [hidden]="expenseIndex !== $currentExpenseIndex">
+            <h4>Original Data</h4>
+            <p><strong>Date:</strong> {{ $expensesFromPdf[expenseIndex].date }}</p>
+            <p><strong>ID:</strong> {{ $expensesFromPdf[expenseIndex].id }}</p>
+            <p><strong>Type:</strong> {{ $expensesFromPdf[expenseIndex].type }}</p>
+            <p><strong>Value:</strong> {{ $expensesFromPdf[expenseIndex].value }}</p>
+            <p><strong>Description:</strong> {{ $expensesFromPdf[expenseIndex].description }}</p>
+            <p><strong>Location:</strong> {{ $expensesFromPdf[expenseIndex].location }}</p>
+          </section>
+
+          <!-- Editable Data -->
+          <section class="editable-form"[hidden]="expenseIndex !== $currentExpenseIndex">
+            <h4>Editable Data</h4>
+            <div class="form-group">
+              <label for="expenseDate-{{ expenseIndex }}">Date</label>
+              <input
+                id="expenseDate-{{ expenseIndex }}"
+                type="date"
+                formControlName="expenseDate"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="expenseName-{{ expenseIndex }}">Name</label>
+              <input
+                id="expenseName-{{ expenseIndex }}"
+                type="text"
+                formControlName="expenseName"
+                placeholder="Expense Name"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="expenseCategory-{{ expenseIndex }}">Category</label>
+              <select
+                id="expenseCategory-{{ expenseIndex }}"
+                formControlName="expenseCategory"
+                [compareWith]="compareID"
+              >
+                <option
+                  *ngFor="let category of $expenseCategories" [ngValue]="category">
+                  {{ category.expenseCategoryName }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="expenseTarget-{{ expenseIndex }}">Target</label>
+              <select
+                id="expenseTarget-{{ expenseIndex }}"
+                formControlName="expenseTarget"
+                [compareWith]="compareID"
+              >
+                <option *ngFor="let target of $expenseTargets" [ngValue]="target">
+                  {{ target.expenseTargetName }}
+                </option>
+              </select>
+              <button class="bte button" (click)="showPopup()">Add/Edit Target</button>
+            </div>
+
+            <div class="form-group">
+              <label for="expenseValue-{{ expenseIndex }}">Value</label>
+              <input
+                id="expenseValue-{{ expenseIndex }}"
+                type="number"
+                formControlName="expenseValue"
+                placeholder="Expense Value"
+              />
+            </div>
+          </section>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Popup Window -->
+<div class="popup-backdrop" *ngIf="$isTargetPopupVisible"></div>
+<div class="popup-window" *ngIf="$isTargetPopupVisible">
+  <div class="popup-header">
+    <h3>Add/Edit Target</h3>
+  </div>
+  <div class="popup-body">
+    <form [formGroup]="$targetForm">
+      <div class="form-group">
+        <label for="expenseTargetName">Target Name</label>
+        <input id="expenseTargetName" formControlName="expenseTargetName" placeholder="Enter Target Name" />
+      </div>
+      <div class="form-group">
+        <label for="expenseBankTargetName">Target Bank Name</label>
+        <input id="expenseBankTargetName" formControlName="expenseBankTargetName" placeholder="Enter Target Bank Name" />
+      </div>
+
+      <div class="form-group">
+        <label for="expenseTargetCategory">Category</label>
+        <select
+          id="expenseTargetCategory"
+          formControlName="expenseTargetCategory"
+          [compareWith]="compareID"
+        >
+          <option
+            *ngFor="let category of $expenseCategories" [ngValue]="category">
+            {{ category.expenseCategoryName }}
+          </option>
+        </select>
+      </div>
+
+    </form>
+  </div>
+  <div class="popup-actions">
+    <button class="bte button save-button" (click)="saveTarget()">Save</button>
+    <button class="bte button cancel-button" (click)="cancelPopup()">Cancel</button>
+  </div>
+</div>
+
+  <!-- Action Buttons -->
+  <div class="alert-box-actions">
+    <button
+      class="bte button"
+      (click)="previousExpense()"
+      [disabled]="$currentExpenseIndex === 0"
+    >
+      Previous
+    </button>
+
+    <div class="operation-counter">
+      {{ $currentExpenseIndex+1}} / {{ expenses.length }}
+    </div>
+    <button
+      class="bte save-button"
+      (click)="nextExpense()"
+      [disabled]="$currentExpenseIndex === expenses.length-1"
+    >
+      Next
+    </button>
+  </div>
+</div>

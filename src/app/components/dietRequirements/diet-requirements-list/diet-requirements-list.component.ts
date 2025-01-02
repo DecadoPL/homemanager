@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { ToastService } from 'src/app/services/toastService.service';
 import { DietRequirementsListItemMONGO } from 'src/app/models/diet/dietRequirementsListItemMONGO.model';
 import { DietRequirementsService } from 'src/app/services/dietRequirements.service';
 
@@ -17,7 +17,7 @@ export class DietRequirementsListComponent implements OnInit {
   searchText!: string;
   
   constructor(private dietRequirementsService: DietRequirementsService,
-              private toastrService: ToastrService){}
+              private toastService: ToastService){}
 
   ngOnInit(){
     this.loadDietRequirementsList();
@@ -37,13 +37,13 @@ export class DietRequirementsListComponent implements OnInit {
     this.dietRequirementsService.deleteDietRequirementsMONGO(this.itemId)
     .subscribe({
       next: (response) => {
-        this.toastrService.success(response.message, 'SUCCESS');
+        this.toastService.showToast(response.message, 'success');
         this.alert=false;
         this.loadDietRequirementsList();
       },
       error: (error) => {
         let errMessage = error.toString()
-        this.toastrService.error(errMessage.replace("Error: ", ""), "ERROR");
+        this.toastService.showToast(errMessage.replace("Error: ", ""), 'danger');
         this.alert=false;
         this.loadDietRequirementsList();
       }

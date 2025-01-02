@@ -8,7 +8,7 @@ import { IngredientService } from 'src/app/services/ingredient.service';
 import { IngredientListItemMONGO } from 'src/app/models/ingredient/ingredientListItemMONGO';
 import { DishIngredientMONGO } from 'src/app/models/dish/dishIngredientMONGO.model';
 import { PortionMONGO } from 'src/app/models/ingredient/portionMONGO.model';
-import { ToastrService } from 'ngx-toastr';
+import { ToastService } from 'src/app/services/toastService.service';
 import { DishMONGO } from 'src/app/models/dish/dishMONGO.model';
 
 @Component({
@@ -31,7 +31,7 @@ export class DishDetailsComponent implements OnInit, IDeactivateComponent{
               private router: Router,
               private dishService: DishService,
               private ingredientService: IngredientService,
-              private toastrService: ToastrService,
+              private toastService: ToastService,
               private fb:FormBuilder){}  
 
   ngOnInit(){
@@ -195,7 +195,7 @@ export class DishDetailsComponent implements OnInit, IDeactivateComponent{
       this.dishService.saveDishMONGO(this.dishForm.value)
       .subscribe( {
         next: (response) => {
-          this.toastrService.success(response.message, 'SUCCESS');
+          this.toastService.showToast(response.message, 'success');
           this.requireSave = false;
 
           this.route.params.subscribe(
@@ -218,7 +218,7 @@ export class DishDetailsComponent implements OnInit, IDeactivateComponent{
         },
         error: (error) => {
           let errMessage = error.toString();
-          this.toastrService.error(errMessage.replace("Error: ", ""), "ERROR");
+          this.toastService.showToast(errMessage.replace("Error: ", ""), 'danger');
         }
       });
        this.requireSave = true;

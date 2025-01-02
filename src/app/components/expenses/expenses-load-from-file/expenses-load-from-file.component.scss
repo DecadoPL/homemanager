@@ -1,0 +1,180 @@
+/* Backdrop to darken the background */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 50;
+}
+
+/* Buttons */
+.bte {
+  margin: 10px;
+}
+
+/* Box Header */
+.box-header {
+  border-bottom: var(--thick-border-width) solid var(--medium-grey);
+  height: 2rem;
+  width: 100%;
+  background: white;
+}
+
+/* Message Container */
+.message-container {
+  margin-top: 4em; /* Ensure no overlap with the header */
+  margin-left: 2rem; /* Ensure no overlap with the header */
+  height: 60vh; /* Dynamic height to fit available space */
+  display: flex; /* Flexbox to center children */
+  align-items: left; /* Center child vertically */
+  justify-content: flex-start; /* Center child horizontally */
+  overflow: hidden; /* Prevent scrollbars */
+  position: relative;
+  width: 64vw;
+  
+}
+
+/* Alert Box Actions (Footer with navigation and counter) */
+.alert-box-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding: 10px 0;
+  z-index: 101;
+}
+
+.operation-counter {
+  font-weight: bold;
+}
+
+/* Alert Box (Modal container) */
+.alert-box {
+  position: fixed;
+  top: 5vh;
+  left: 5vw;
+  width: 60vw;
+  // height: 90vh; /* Ensure enough vertical space for the container */
+  z-index: 100;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Original Data and Editable Form Styling */
+.original-data{
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 1.5rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  border-radius: 5px;
+}
+
+.editable-form {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 1.5rem;
+  // margin-bottom: 1.5rem;
+  border-radius: 5px;
+}
+
+.original-data {
+  background: #f9f9f9;
+}
+
+.editable-form {
+  background: #fff;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 5px;
+  font-size: 14px;
+}
+
+/* Operation Wrapper */
+.operation-wrapper {
+  width: 100%; /* Take full width of container */
+  max-width: 90%; /* Optional: Limit width for visual balance */
+  max-height: 100%; /* Prevent overflowing */
+  // padding-top: 4rem;
+  // padding: 20px;
+  box-sizing: border-box; /* Include padding in size calculations */
+  position: absolute; /* Needed for animations */
+  display: flex; /* Ensures child layout consistency */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center content vertically within wrapper */
+}
+
+/* Valid/Invalid Operation Styling */
+.valid-operation {
+  background: lightgreen;
+}
+
+.invalid-operation {
+  background: lightcoral;
+}
+
+.popup-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.popup-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  z-index: 1001;
+}
+
+.popup-header h3 {
+  margin: 0 0 10px;
+}
+
+.popup-body {
+  margin-bottom: 20px;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.popup-actions .button {
+  margin-left: 10px;
+}
+
+input[type="file"] {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}

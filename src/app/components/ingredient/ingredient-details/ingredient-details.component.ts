@@ -6,7 +6,7 @@ import { IDeactivateComponent } from 'src/app/services/can-deactivate-guard.serv
 import { IngredientMONGO } from 'src/app/models/ingredient/ingredientMONGO.model';
 import { PortionNameMONGO } from 'src/app/models/ingredient/portionNameMONGO.model';
 import { PortionMONGO } from 'src/app/models/ingredient/portionMONGO.model';
-import { ToastrService } from 'ngx-toastr';
+import { ToastService } from 'src/app/services/toastService.service';
 import { PortionNameService } from 'src/app/services/portionName.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class IngredientDetailsComponent implements OnInit, IDeactivateComponent{
               private router: Router,
               private ingredientService: IngredientService,
               private fb: FormBuilder,
-              private toastrService: ToastrService,
+              private toastService: ToastService,
               private portionNameService: PortionNameService
              ){}
 
@@ -194,7 +194,7 @@ export class IngredientDetailsComponent implements OnInit, IDeactivateComponent{
       this.ingredientService.saveIngredientMONGO(this.ingredientForm.value)
         .subscribe( {
           next: (response) => {
-            this.toastrService.success(response.message, 'SUCCESS');
+            this.toastService.showToast(response.message, 'success');
 
             this.route.params.subscribe(
               (params: Params) => {
@@ -227,7 +227,7 @@ export class IngredientDetailsComponent implements OnInit, IDeactivateComponent{
           },
           error: (error) => {
             let errMessage = error.toString();
-            this.toastrService.error(errMessage.replace("Error: ", ""), "ERROR");
+            this.toastService.showToast(errMessage.replace("Error: ", ""), 'danger');
           }
         });
     }

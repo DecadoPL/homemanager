@@ -11,7 +11,7 @@ import { DietDayMONGO } from 'src/app/models/diet/dietDayMONGO.model';
 import { DietDishMONGO } from 'src/app/models/diet/dietDishMONGO.model';
 import { DietRequirementsListItemMONGO } from 'src/app/models/diet/dietRequirementsListItemMONGO.model';
 import { DishMONGO } from 'src/app/models/dish/dishMONGO.model';
-import { ToastrService } from 'ngx-toastr';
+import { ToastService } from 'src/app/services/toastService.service';
 import { DietMONGO } from 'src/app/models/diet/dietMONGO.model';
 import { UnusedDish } from 'src/app/models/diet/unusedDish.model';
 import { DishService } from 'src/app/services/dish.service';
@@ -69,7 +69,7 @@ export class DietDetailsComponent implements OnInit, IDeactivateComponent{
               private fb:FormBuilder,
               private dietRequirementsService: DietRequirementsService,
               private ngbDateParserFormatter: NgbDateParserFormatter,
-              private toastrService: ToastrService,
+              private toastService: ToastService,
               private dishService: DishService
               ){}
 
@@ -357,12 +357,12 @@ export class DietDetailsComponent implements OnInit, IDeactivateComponent{
       this.dietService.saveDietMONGO(this.dietForm.value)
       .subscribe( {
         next: (response) => {
-          this.toastrService.success(response.message, 'SUCCESS');
+          this.toastService.showToast(response.message, 'success');
           this.requireSave = false;
         },
         error: (error) => {
           let errMessage = error.toString();
-          this.toastrService.error(errMessage.replace("Error: ", ""), "ERROR");
+          this.toastService.showToast(errMessage.replace("Error: ", ""), 'danger');
         }
       });
        this.requireSave = true;

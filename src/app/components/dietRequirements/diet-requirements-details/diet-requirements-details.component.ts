@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { ToastService } from 'src/app/services/toastService.service';
 import { DietRequirementsMONGO } from 'src/app/models/diet/dietRequirementsMONGO.model';
 import { DietRequirementsService } from 'src/app/services/dietRequirements.service';
 
@@ -22,7 +22,7 @@ export class DietRequirementsDetailsComponent implements OnInit {
   constructor(private dietRequirementsService: DietRequirementsService,
               private fb: FormBuilder,
               private router: Router,
-              private toastrService: ToastrService,
+              private toastService: ToastService,
               private route: ActivatedRoute){}
 
   ngOnInit(){
@@ -195,12 +195,12 @@ export class DietRequirementsDetailsComponent implements OnInit {
       this.dietRequirementsService.saveDietRequirementsMONGO(this.dietRequirementsForm.value)
       .subscribe( {
         next: (response) => {
-          this.toastrService.success(response.message, 'SUCCESS');
+          this.toastService.showToast(response.message, 'success');
           this.requireSave = false;
         },
         error: (error) => {
           let errMessage = error.toString();
-          this.toastrService.error(errMessage.replace("Error: ", ""), "ERROR");
+          this.toastService.showToast(errMessage.replace("Error: ", ""), 'danger');
         }
       });
        this.requireSave = true;

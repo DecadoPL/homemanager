@@ -1,0 +1,57 @@
+<div class="component">
+
+  <app-alert [message]="alertMsg" *ngIf="alert" (cancel)="alertCancel()" (save)="alertSave()" (discard)="alertDiscard()"></app-alert>
+ 
+  <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()">
+
+    <div class="dummy-properties"></div>
+
+    <div class="main-properties secondary-background">
+      <div class="buttons">
+        <button type="button" class="button" (click)="goUpOneLevel()">Back</button>
+        <p *ngIf="newExpenseFlag">New Expense</p>
+        <p *ngIf="!newExpenseFlag">Update Expense</p>
+        <button type="submit" class="button"  [disabled]="!requireSave">Save</button>
+      </div>
+      <hr>
+      <div class="formGroup">
+        <label for="expenseName">Expense name</label>
+        <input type="text" id="expenseName" formControlName="expenseName" class="input" >
+        <span *ngIf="!expenseForm.get('expenseName')?.valid && expenseForm.get('expenseName')?.touched" class="text-danger">
+          Please enter a valid expense name
+        </span>
+      </div>
+      <div class="formGroup" formGroupName="expenseCategory"> 
+        <label for="expenseCategory">Expense category: </label>
+          <select  id="expenseCategory" formControlName="expenseCategoryName" class="select input--auto" (change)="changeSelectedExpenseCategory($event)">    
+            <option *ngFor="let category of expenseCategories">
+              {{ category.expenseCategoryName }}
+            </option>
+          </select> 
+      </div>
+      <div class="formGroup">
+        <label for="expenseDate">Expense date</label>
+        <input type="date" [(ngModel)]="today" id="expenseDate" formControlName="expenseDate" class="input" >
+        <span *ngIf="!expenseForm.get('expenseDate')?.valid && expenseForm.get('expenseDate')?.touched" class="text-danger">
+          Please enter a valid expense date
+        </span>
+      </div>
+
+      <div class="formGroup" formGroupName="expenseTarget"> 
+        <label for="expenseTarget">Expense target: </label>
+          <select  id="expenseTarget" formControlName="expenseTargetName" class="select input--auto" (change)="changeSelectedExpenseTarget($event)">    
+            <option *ngFor="let target of expenseTargets">
+              {{ target.expenseTargetName }}
+            </option>
+          </select> 
+      </div>
+      <div class="formGroup">
+        <label for="expenseValue">Expense value</label>
+        <input type="number" id="expenseValue" formControlName="expenseValue" class="input" >
+        <span *ngIf="!expenseForm.get('expenseValue')?.valid && expenseForm.get('expenseValue')?.touched" class="text-danger">
+          Please enter a valid expense value
+        </span>
+      </div>
+    </div>
+  </form>
+</div>
